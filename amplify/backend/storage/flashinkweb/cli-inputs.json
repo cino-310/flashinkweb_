@@ -1,0 +1,14 @@
+{
+  "resourceName": "flashinkweb",
+  "policyUUID": "a6a3f9d1",
+  "bucketName": "flashinkweb20231019",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

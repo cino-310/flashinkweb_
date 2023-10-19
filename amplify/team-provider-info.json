@@ -17,6 +17,9 @@
       },
       "api": {
         "flashinkweb": {}
+      },
+      "storage": {
+        "flashinkweb": {}
       }
     }
   }
