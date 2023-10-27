@@ -1,11 +1,79 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-type Note @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String!
-  description: String
-  image: String
+enum MessageType {
+  SUCCESS
+  ERROR
 }
+
+type Message @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  message: String!
+  type: MessageType!
+}
+
+enum DrawingMode {
+  TEXT
+  PEN
+  ERASER
+}
+
+enum InkNo {
+  FIRST
+  SECOND
+  THIRD
+}
+
+type InkInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  toolbarinfoID: ID! @index(name: "byToolbarInfo")
+  inkNo: InkNo!
+  inkColorCd: String
+}
+
+type ToolbarInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  isVisibleInk1: Boolean
+  isVisibleInk2: Boolean
+  isVisibleInk3: Boolean
+  fontSize: Int
+  InkInfos: [InkInfo] @hasMany(indexName: "byToolbarInfo", fields: ["id"])
+  drawingMode: DrawingMode
+}
+
+type NotePen @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  noteitemID: ID! @index(name: "byNoteItem")
+  xPosition: Int
+  yPosition: Int
+  penSize: Int!
+  penContent: String
+  penColorCd: String!
+}
+
+type NoteText @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  noteitemID: ID! @index(name: "byNoteItem")
+  xPosition: Int
+  yPosition: Int
+  textSize: Int!
+  textContent: String
+  textColorCd: String!
+}
+
+type AccountInfo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  mailAddress: String!
+  NoteItems: [NoteItem] @hasMany(indexName: "byAccountInfo", fields: ["id"])
+}
+
+type NoteItem @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  accountinfoID: ID! @index(name: "byAccountInfo")
+  title: String
+  createDate: String
+  createTime: String
+  updateDate: String
+  NoteTexts: [NoteText] @hasMany(indexName: "byNoteItem", fields: ["id"])
+  NotePens: [NotePen] @hasMany(indexName: "byNoteItem", fields: ["id"])
+  updateTime: String
+  ToolbarInfo: ToolbarInfo @hasOne
+}
+ 

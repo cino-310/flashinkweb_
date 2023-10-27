@@ -5,5 +5,9 @@
  **************************************************************************/
 
 export { default as studioTheme } from "./studioTheme";
-export { default as NoteCreateForm } from "./NoteCreateForm";
-export { default as NoteUpdateForm } from "./NoteUpdateForm";
+export { default as MessageCreateForm } from "./MessageCreateForm";
+export { default as MessageUpdateForm } from "./MessageUpdateForm";
+export { default as ToolbarInfoCreateForm } from "./ToolbarInfoCreateForm";
+export { default as ToolbarInfoUpdateForm } from "./ToolbarInfoUpdateForm";
+export { default as AccountInfoCreateForm } from "./AccountInfoCreateForm";
+export { default as AccountInfoUpdateForm } from "./AccountInfoUpdateForm";
